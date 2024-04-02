@@ -35,7 +35,7 @@ const getActivity = async (req, res) => {
     res.status(200).json(results.rows[0]);
   } catch (error) {
     res.status(409).json({ error: error.message });
-    console.log("Unable to get trip");
+    console.log("Unable to get activity.");
     console.log("Error:", error.message);
   }
 };
@@ -45,7 +45,7 @@ const updateActivity = async (request, response) => {
     const id = parseInt(req.params.id);
 
     const results = await pool.query(
-      `UPDATE trips
+      `UPDATE activities
       SET activity = $1, num_votes = $2
       WHERE id = $3`,
       [activity, num_votes, id]
