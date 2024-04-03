@@ -17,10 +17,10 @@ app.get("/", (req, res) => {
     );
 });
 
-app.use("/trips", tripRoutes);
-app.use("/activities", activitiesRoutes);
-app.use("/destinations", destinationsRoutes);
-app.use("/trip_destinations", tripDestinationsRoutes);
+app.use("/api/trips", tripRoutes);
+app.use("/api/activities", activitiesRoutes);
+app.use("/api/destinations", destinationsRoutes);
+app.use("/api/trip_destinations", tripDestinationsRoutes);
 
 const PORT = process.env.PORT || 3001;
 
