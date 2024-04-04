@@ -4,7 +4,7 @@ const createTripDestination = async (req, res) => {
   try {
     const { trip_id, destination_id } = req.body;
     const results = await pool.query(
-      `INSERT INTO trip_destinations (trip_id, destination_id)
+      `INSERT INTO trips_destinations (trip_id, destination_id)
       VALUES($1, $2)
       RETURNING *`,
       [trip_id, destination_id]
@@ -19,7 +19,7 @@ const createTripDestination = async (req, res) => {
 const getTripDestinations = async (req, res) => {
   try {
     const results = await pool.query(
-      `SELECT * FROM trip_destinations ORDER BY destination_id ASC`
+      `SELECT * FROM trips_destinations ORDER BY destination_id ASC`
     );
     res.status(200).json(results.rows);
   } catch (error) {
@@ -30,7 +30,7 @@ const getAllTrips = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const results = await pool.query(
-      "SELECT * FROM trip_destinations WHERE destination_id=$1",
+      "SELECT * FROM trips_destinations WHERE destination_id=$1",
       [destination_id]
     );
     res.status(200).json(results.rows[0]);
@@ -44,7 +44,7 @@ const getAllDestinations = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const results = await pool.query(
-      "SELECT * FROM trip_destinations WHERE trip_id=$1",
+      "SELECT * FROM trips_destinations WHERE trip_id=$1",
       [trip_id]
     );
     res.status(200).json(results.rows[0]);
