@@ -3,7 +3,6 @@ import "./CreateTrip.css";
 
 const CreateTrip = () => {
   const [post, setPost] = useState({
-    id: 0,
     title: "",
     description: "",
     img_url: "",
@@ -33,7 +32,7 @@ const CreateTrip = () => {
       },
       body: JSON.stringify(post),
     };
-
+    console.log(options.body);
     fetch("/api/trips", options);
     //window.location.href = "/";
   };
