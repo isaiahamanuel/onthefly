@@ -8,7 +8,7 @@ const createActivity = async (req, res) => {
       `INSERT INTO activities (trip_id, activity, num_votes)
       VALUES($1, $2, $3)
       RETURNING *`,
-      [trip_id, activity, num_votes]
+      [trip_id, activity, 0]
     );
 
     res.status(201).json(results.rows[0]);
@@ -29,7 +29,7 @@ const getActivities = async (req, res) => {
 };
 const getTripActivities = async (req, res) => {
   try {
-    const trip_id = parseInt(req.params.id);
+    const trip_id = parseInt(req.params.trip_id);
     const results = await pool.query(
       "SELECT * FROM activities WHERE trip_id = $1",
       [trip_id]

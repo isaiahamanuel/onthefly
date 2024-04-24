@@ -26,12 +26,12 @@ const getTripDestinations = async (req, res) => {
     res.status(409).json({ error: error.message });
   }
 };
-const getAllTrips = async (req, res) => {
+const getAllActivities = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
+    const trip_id = parseInt(req.params.trip_id);
     const results = await pool.query(
-      "SELECT * FROM trips_destinations WHERE destination_id=$1",
-      [destination_id]
+      "SELECT * FROM trips_destinations WHERE trip_id=$1",
+      [trip_id]
     );
     res.status(200).json(results.rows[0]);
   } catch (error) {
@@ -42,7 +42,7 @@ const getAllTrips = async (req, res) => {
 };
 const getAllDestinations = async (req, res) => {
   try {
-    const id = parseInt(req.params.id);
+    const trip_id = parseInt(req.params.trip_id);
     const results = await pool.query(
       "SELECT * FROM trips_destinations WHERE trip_id=$1",
       [trip_id]
@@ -58,6 +58,6 @@ const getAllDestinations = async (req, res) => {
 export default {
   createTripDestination,
   getTripDestinations,
-  getAllTrips,
+  getAllActivities,
   getAllDestinations,
 };

@@ -28,7 +28,7 @@ const CreateActivity = () => {
     };
 
     fetch("/api/activities/" + trip_id, options);
-    window.location.href = "/";
+    //window.location.href = "/";
   };
 
   return (

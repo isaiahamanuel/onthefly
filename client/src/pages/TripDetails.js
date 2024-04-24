@@ -16,8 +16,17 @@ const TripDetails = ({ data }) => {
     end_date: "",
     total_cost: 0.0,
   });
-  const [activities, setActivities] = useState([]);
+  const [activities, setActivities] = useState([
+    {
+      id: 1,
+      trip_id: 1,
+      activity: "Swimming",
+      num_votes: 0,
+    },
+  ]);
   const [destinations, setDestinations] = useState([]);
+  console.log(activities);
+  console.log(destinations);
 
   useEffect(() => {
     const result = data.filter((item) => item.id === parseInt(id))[0];
@@ -34,16 +43,16 @@ const TripDetails = ({ data }) => {
 
     const fetchActivities = async () => {
       const response = await fetch("/api/activities/" + id);
-      const data = await response.json();
-      setActivities(data);
+      const data2 = await response.json();
+      setActivities(data2);
     };
 
     const fetchDestinations = async () => {
       const response = await fetch(
         "/api/trips-destinations/destinations/" + id
       );
-      const data = await response.json();
-      setDestinations(data);
+      const data3 = await response.json();
+      setDestinations(data3);
     };
 
     fetchActivities();
@@ -69,15 +78,18 @@ const TripDetails = ({ data }) => {
 
       <div className="flex-container">
         <div className="activities">
-          {activities && activities.length > 0
-            ? activities.map((activity, index) => (
-                <ActivityBtn
-                  id={activity.id}
-                  activity={activity.activity}
-                  num_votes={activity.num_votes}
-                />
-              ))
-            : ""}
+          {activities && activities.length > 0 ? (
+            activities.map((activity, index) => (
+              <ActivityBtn
+                key={activity.id} // Ensure each child has a unique key
+                id={activity.id}
+                activity={activity.activity}
+                num_votes={activity.num_votes}
+              />
+            ))
+          ) : (
+            <p>No activities available</p>
+          )}
           <br />
           <Link to={"../../activity/create/" + id}>
             <button className="addActivityBtn">+ Add Activity</button>
