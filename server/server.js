@@ -4,6 +4,9 @@ import tripRoutes from "./routes/trips.js";
 import activitiesRoutes from "./routes/activities.js";
 import destinationsRoutes from "./routes/destinations.js";
 import tripDestinationsRoutes from "./routes/trip_destinations.js";
+import passport from "passport";
+import session from "express-session";
+import { GitHub } from "./config/auth.js";
 
 const app = express();
 app.use(express.json());
